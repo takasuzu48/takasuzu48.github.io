@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — tak48dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0e0e0f; --surface: #161618; --border: #2a2a2e;
+    --accent: #f97316; --text: #f0ede8; --muted: #6b6b72;
+    --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
+  }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 0 24px; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025; pointer-events: none; z-index: 100;
+  }
+  .orb {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 70%);
+    top: -200px; right: -200px; pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.1);opacity:.7;} }
+  .lang-toggle {
+    position: fixed; top: 20px; right: 24px; display: flex; gap: 4px; z-index: 200;
+  }
+  .lang-btn {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); cursor: pointer;
+    transition: border-color .15s, color .15s;
+  }
+  .lang-btn.active { border-color: var(--accent); color: var(--accent); }
+  .back-link {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    margin-bottom: 40px; transition: color .15s;
+  }
+  .back-link:hover { color: var(--accent); }
+  main { width: 100%; max-width: 680px; padding: 80px 0 60px; flex: 1; }
+  .page-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
+    opacity: 0; animation: fadeUp .6s ease forwards .1s;
+  }
+  h1 {
+    font-size: clamp(36px, 8vw, 60px); font-weight: 800; line-height: 1;
+    letter-spacing: -0.03em; margin-bottom: 8px;
+    opacity: 0; animation: fadeUp .6s ease forwards .2s;
+  }
+  .updated {
+    font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 48px;
+    opacity: 0; animation: fadeUp .6s ease forwards .3s;
+  }
+  .doc-body {
+    opacity: 0; animation: fadeUp .6s ease forwards .4s;
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  .doc-section { display: flex; flex-direction: column; gap: 12px; }
+  .doc-section h2 {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--accent); font-family: var(--mono); text-transform: uppercase;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .doc-section p, .doc-section li {
+    font-size: 13px; line-height: 1.9; color: #c0bdb8; font-family: var(--mono);
+  }
+  .doc-section ul { padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+  .doc-section a { color: var(--accent); text-decoration: none; }
+  .doc-section a:hover { text-decoration: underline; }
+  .doc-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 11px; }
+  .doc-table th {
+    text-align: left; padding: 7px 10px; background: var(--surface);
+    border: 1px solid var(--border); color: var(--muted); font-weight: 500;
+  }
+  .doc-table td { padding: 7px 10px; border: 1px solid var(--border); color: #c0bdb8; line-height: 1.6; }
+  footer {
+    width: 100%; max-width: 680px; padding: 24px 0 40px;
+    display: flex; justify-content: space-between; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+  [data-lang], span[data-lang] { display: none; }
+  .lang-ja [data-lang="ja"]     { display: block; }
+  .lang-en [data-lang="en"]     { display: block; }
+  .lang-ja span[data-lang="ja"] { display: inline; }
+  .lang-en span[data-lang="en"] { display: inline; }
+</style>
+</head>
+<body class="lang-ja">
+<div class="orb"></div>
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JA</button>
+  <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+<main>
+  <a class="back-link" href="./index.html">← tak48dev</a>
+
+  <p class="page-eyebrow">tak48dev</p>
+  <h1>Privacy<br>Policy</h1>
+  <p class="updated">
+    <span data-lang="ja">最終更新日：2026年4月1日</span>
+    <span data-lang="en">Last updated: April 1, 2026</span>
+  </p>
+  <div class="doc-body">
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>1. はじめに</h2>
+        <p>Takashi Suzuki（tak48dev）は「ハンドボール 簡易スコアー表」アプリにおける個人情報の取り扱いについて以下の通り定めます。</p>
+      </div>
+      <div data-lang="en">
+        <h2>1. Introduction</h2>
+        <p>Takashi Suzuki (tak48dev) explains how personal information is handled in the "Handball Simple Score" app.</p>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>2. 収集する情報</h2>
+        <p><strong>開発者が直接収集する情報：</strong>本アプリは開発者のサーバーに個人情報・試合データを一切送信しません。すべての記録はデバイス内にのみ保存されます。</p>
+        <p style="margin-top:12px"><strong>第三者サービス：</strong></p>
+        <table class="doc-table" style="margin-top:8px">
+          <tr><th>サービス</th><th>目的</th><th>ポリシー</th></tr>
+          <tr><td>Google AdMob</td><td>広告配信（無料版のみ）</td><td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td></tr>
+          <tr><td>Apple App Store</td><td>アプリ内課金処理</td><td><a href="https://www.apple.com/jp/privacy/" target="_blank">Apple Privacy Policy</a></td></tr>
+        </table>
+      </div>
+      <div data-lang="en">
+        <h2>2. Information We Collect</h2>
+        <p><strong>Directly by the Developer:</strong> The App does not transmit any personal information or match data to our servers. All records are stored locally on your device.</p>
+        <p style="margin-top:12px"><strong>Third-party services:</strong></p>
+        <table class="doc-table" style="margin-top:8px">
+          <tr><th>Service</th><th>Purpose</th><th>Policy</th></tr>
+          <tr><td>Google AdMob</td><td>Ad delivery (free version only)</td><td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td></tr>
+          <tr><td>Apple App Store</td><td>In-app purchase processing</td><td><a href="https://www.apple.com/privacy/" target="_blank">Apple Privacy Policy</a></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>3. 広告について</h2>
+        <ul>
+          <li>無料版では Google AdMob による広告が表示されます。AdMob はデバイス識別子（IDFA）等を使用して関連性の高い広告を表示する場合があります。</li>
+          <li>iOS の「設定 → プライバシーとセキュリティ → トラッキング」からトラッキングを無効にできます。</li>
+          <li>広告削除を購入後は AdMob の SDK が広告リクエストを行わなくなります。</li>
+        </ul>
+      </div>
+      <div data-lang="en">
+        <h2>3. Advertising</h2>
+        <ul>
+          <li>The free version displays ads via Google AdMob. AdMob may use device identifiers (e.g., IDFA) to serve relevant ads.</li>
+          <li>You can disable app tracking in iOS via <strong>Settings → Privacy &amp; Security → Tracking</strong>.</li>
+          <li>After purchasing the ad removal feature, the AdMob SDK will no longer make ad requests.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>4. データの保存場所</h2>
+        <table class="doc-table">
+          <tr><th>データ</th><th>保存場所</th><th>外部送信</th></tr>
+          <tr><td>試合記録・イベントログ</td><td>デバイス内（SwiftData）</td><td>なし</td></tr>
+          <tr><td>購入状態（isPro）</td><td>デバイス内（UserDefaults）</td><td>なし</td></tr>
+          <tr><td>CSVエクスポートファイル</td><td>一時フォルダ</td><td>ユーザー共有時のみ</td></tr>
+        </table>
+      </div>
+      <div data-lang="en">
+        <h2>4. Data Storage</h2>
+        <table class="doc-table">
+          <tr><th>Data</th><th>Location</th><th>External</th></tr>
+          <tr><td>Match records &amp; event logs</td><td>On-device (SwiftData)</td><td>None</td></tr>
+          <tr><td>Purchase status (isPro)</td><td>On-device (UserDefaults)</td><td>None</td></tr>
+          <tr><td>CSV export files</td><td>Temp folder</td><td>Only when shared by user</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>5. 子どものプライバシー</h2>
+        <p>本アプリは13歳未満を対象としていません。13歳未満の個人情報を意図的に収集することはありません。</p>
+      </div>
+      <div data-lang="en">
+        <h2>5. Children's Privacy</h2>
+        <p>The App is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>6. お問い合わせ</h2>
+        <p>プライバシーに関するご質問は <a href="mailto:tak48dev@gmail.com">tak48dev@gmail.com</a> までご連絡ください。</p>
+      </div>
+      <div data-lang="en">
+        <h2>6. Contact</h2>
+        <p>For privacy-related questions, contact us at <a href="mailto:tak48dev@gmail.com">tak48dev@gmail.com</a>.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+<footer>
+  <span>© 2026 tak48dev</span>
+  <span>Made in Japan 🇯🇵</span>
+</footer>
+<script>
+  function setLang(lang, silent) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    if (!silent) localStorage.setItem('tak48dev-lang', lang);
+  }
+  (function() {
+    var saved = localStorage.getItem('tak48dev-lang');
+    var auto  = (navigator.language || 'ja').startsWith('ja') ? 'ja' : 'en';
+    setLang(saved || auto, true);
+  })();
+</script>
+</body>
+</html>
