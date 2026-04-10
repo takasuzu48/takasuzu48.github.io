@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tak48dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0e0e0f; --surface: #161618; --border: #2a2a2e;
+    --accent: #f97316; --text: #f0ede8; --muted: #6b6b72;
+    --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 0 24px; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025; pointer-events: none; z-index: 100;
+  }
+  .orb {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%);
+    top: -200px; right: -200px; pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.1); opacity: 0.7; }
+  }
+  main {
+    width: 100%; max-width: 680px; padding: 80px 0 60px;
+    display: flex; flex-direction: column; gap: 56px; flex: 1;
+  }
+  /* 言語切り替え */
+  .lang-toggle {
+    position: fixed; top: 20px; right: 24px;
+    display: flex; gap: 4px; z-index: 200;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+  .lang-btn {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    cursor: pointer; transition: border-color 0.15s, color 0.15s;
+  }
+  .lang-btn.active { border-color: var(--accent); color: var(--accent); }
+  /* ヘッダー */
+  header { display: flex; flex-direction: column; gap: 16px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  h1 {
+    font-size: clamp(48px, 10vw, 80px); font-weight: 800;
+    line-height: 1; letter-spacing: -0.03em;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s;
+  }
+  h1 span { color: var(--accent); }
+  .tagline {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+  /* セクション */
+  .section-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
+  }
+  /* アプリグリッド */
+  .apps-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s;
+  }
+  @media (max-width: 520px) { .apps-grid { grid-template-columns: 1fr; } }
+  .app-card {
+    display: flex; flex-direction: column; gap: 16px; padding: 22px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; position: relative; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .app-card:hover { border-color: rgba(249,115,22,0.5); transform: translateY(-2px); }
+  .app-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(249,115,22,0.06) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.2s; pointer-events: none;
+  }
+  .app-card:hover::after { opacity: 1; }
+  .app-card-top { display: flex; align-items: flex-start; gap: 14px; }
+  .app-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: var(--accent); display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; font-size: 26px;
+  }
+  .app-meta { flex: 1; min-width: 0; }
+  .app-name { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; line-height: 1.2; }
+  .app-platform { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
+  .app-links { display: flex; flex-direction: column; gap: 6px; }
+  .app-link {
+    display: flex; align-items: center; gap: 8px; padding: 9px 12px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 8px; text-decoration: none; color: var(--text);
+    font-family: var(--mono); font-size: 11px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .app-link:hover { border-color: rgba(249,115,22,0.4); background: rgba(249,115,22,0.06); }
+  .app-link-icon { font-size: 13px; flex-shrink: 0; }
+  .app-link-label { flex: 1; }
+  .app-link-arrow { color: var(--muted); font-size: 10px; }
+  /* サイトリンク */
+  .site-links {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.65s;
+  }
+  @media (max-width: 520px) { .site-links { grid-template-columns: 1fr; } }
+  .site-link {
+    display: flex; align-items: center; gap: 12px; padding: 16px 18px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; text-decoration: none; color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .site-link:hover { border-color: rgba(249,115,22,0.4); transform: translateY(-2px); }
+  .site-link-icon { font-size: 18px; flex-shrink: 0; }
+  .site-link-title { font-size: 14px; font-weight: 700; }
+  .site-link-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 2px; }
+  /* フッター */
+  footer {
+    width: 100%; max-width: 680px; padding: 24px 0 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.75s;
+  }
+  .footer-text { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  /* i18n */
+  [data-lang], span[data-lang] { display: none; }
+  .lang-ja [data-lang="ja"]      { display: block; }
+  .lang-en [data-lang="en"]      { display: block; }
+  .lang-ja span[data-lang="ja"]  { display: inline; }
+  .lang-en span[data-lang="en"]  { display: inline; }
+</style>
+</head>
+<body class="lang-ja">
+
+<div class="orb"></div>
+
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JA</button>
+  <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<main>
+  <header>
+    <p class="eyebrow">tak48dev</p>
+    <h1>Apps by<br><span>tak48dev</span></h1>
+    <p class="tagline">
+      <span data-lang="ja">// 個人開発 iOS アプリ</span>
+      <span data-lang="en">// independent iOS developer</span>
+    </p>
+  </header>
+
+  <section>
+    <p class="section-label">
+      <span data-lang="ja">アプリ</span>
+      <span data-lang="en">Apps</span>
+    </p>
+    <div class="apps-grid">
+
+      <!-- iPhone版 -->
+      <div class="app-card">
+        <div class="app-card-top">
+          <div class="app-icon">🤾</div>
+          <div class="app-meta">
+            <div class="app-name">Handball Score</div>
+            <div class="app-platform">for iPhone</div>
+          </div>
+        </div>
+        <div class="app-links">
+          <a class="app-link" href="https://apps.apple.com/sg/app/handball-simple-stats/id6761206715" target="_blank" rel="noopener">
+            <span class="app-link-icon">⬇︎</span>
+            <span class="app-link-label">App Store</span>
+            <span class="app-link-arrow">↗</span>
+          </a>
+          <a class="app-link" href="./guide/guide-iphone.html">
+            <span class="app-link-icon">📖</span>
+            <span class="app-link-label">
+              <span data-lang="ja">使い方ガイド</span>
+              <span data-lang="en">User Guide</span>
+            </span>
+            <span class="app-link-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- iPad版 -->
+      <div class="app-card">
+        <div class="app-card-top">
+          <div class="app-icon">🤾</div>
+          <div class="app-meta">
+            <div class="app-name">Handball Score</div>
+            <div class="app-platform">for iPad</div>
+          </div>
+        </div>
+        <div class="app-links">
+          <a class="app-link" href="https://apps.apple.com/sg/app/handball-stats/id6761154158" target="_blank" rel="noopener">
+            <span class="app-link-icon">⬇︎</span>
+            <span class="app-link-label">App Store</span>
+            <span class="app-link-arrow">↗</span>
+          </a>
+          <a class="app-link" href="./guide/guide-ipad.html">
+            <span class="app-link-icon">📖</span>
+            <span class="app-link-label">
+              <span data-lang="ja">使い方ガイド</span>
+              <span data-lang="en">User Guide</span>
+            </span>
+            <span class="app-link-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">
+      <span data-lang="ja">サイト情報</span>
+      <span data-lang="en">Site</span>
+    </p>
+    <div class="site-links">
+      <a class="site-link" href="./privacy.html">
+        <span class="site-link-icon">🔒</span>
+        <div>
+          <div class="site-link-title">Privacy Policy</div>
+          <div class="site-link-sub" data-lang="ja">プライバシーポリシー</div>
+          <div class="site-link-sub" data-lang="en">Data handling & ad info</div>
+        </div>
+      </a>
+      <a class="site-link" href="./support.html">
+        <span class="site-link-icon">✉️</span>
+        <div>
+          <div class="site-link-title">Support</div>
+          <div class="site-link-sub" data-lang="ja">サポートページ</div>
+          <div class="site-link-sub" data-lang="en">Support Page</div>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="footer-text">© 2026 tak48dev</span>
+  <span class="footer-text">Made in Japan 🇯🇵</span>
+</footer>
+
+<script>
+  function setLang(lang, silent) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    if (!silent) localStorage.setItem('tak48dev-lang', lang);
+  }
+  (function() {
+    var saved = localStorage.getItem('tak48dev-lang');
+    var auto  = (navigator.language || 'ja').startsWith('ja') ? 'ja' : 'en';
+    setLang(saved || auto, true);
+  })();
+</script>
+</body>
+</html>
