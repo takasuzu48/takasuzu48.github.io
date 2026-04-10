@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — tak48dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0e0e0f; --surface: #161618; --border: #2a2a2e;
+    --accent: #f97316; --text: #f0ede8; --muted: #6b6b72;
+    --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
+  }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 0 24px; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025; pointer-events: none; z-index: 100;
+  }
+  .orb {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 70%);
+    top: -200px; right: -200px; pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.1);opacity:.7;} }
+  .lang-toggle {
+    position: fixed; top: 20px; right: 24px; display: flex; gap: 4px; z-index: 200;
+  }
+  .lang-btn {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); cursor: pointer;
+    transition: border-color .15s, color .15s;
+  }
+  .lang-btn.active { border-color: var(--accent); color: var(--accent); }
+  .back-link {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    margin-bottom: 40px; transition: color .15s;
+  }
+  .back-link:hover { color: var(--accent); }
+  main { width: 100%; max-width: 680px; padding: 80px 0 60px; flex: 1; }
+  .page-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
+    opacity: 0; animation: fadeUp .6s ease forwards .1s;
+  }
+  h1 {
+    font-size: clamp(36px, 8vw, 60px); font-weight: 800; line-height: 1;
+    letter-spacing: -0.03em; margin-bottom: 8px;
+    opacity: 0; animation: fadeUp .6s ease forwards .2s;
+  }
+  .updated {
+    font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 48px;
+    opacity: 0; animation: fadeUp .6s ease forwards .3s;
+  }
+  .doc-body {
+    opacity: 0; animation: fadeUp .6s ease forwards .4s;
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  .doc-section { display: flex; flex-direction: column; gap: 12px; }
+  .doc-section h2 {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--accent); font-family: var(--mono); text-transform: uppercase;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .doc-section p, .doc-section li {
+    font-size: 13px; line-height: 1.9; color: #c0bdb8; font-family: var(--mono);
+  }
+  .doc-section ul { padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+  .doc-section a { color: var(--accent); text-decoration: none; }
+  .doc-section a:hover { text-decoration: underline; }
+  .doc-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 11px; }
+  .doc-table th {
+    text-align: left; padding: 7px 10px; background: var(--surface);
+    border: 1px solid var(--border); color: var(--muted); font-weight: 500;
+  }
+  .doc-table td { padding: 7px 10px; border: 1px solid var(--border); color: #c0bdb8; line-height: 1.6; }
+  footer {
+    width: 100%; max-width: 680px; padding: 24px 0 40px;
+    display: flex; justify-content: space-between; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+  [data-lang], span[data-lang] { display: none; }
+  .lang-ja [data-lang="ja"]     { display: block; }
+  .lang-en [data-lang="en"]     { display: block; }
+  .lang-ja span[data-lang="ja"] { display: inline; }
+  .lang-en span[data-lang="en"] { display: inline; }
+</style>
+</head>
+<body class="lang-ja">
+<div class="orb"></div>
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JA</button>
+  <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+<main>
+  <a class="back-link" href="./index.html">← tak48dev</a>
+
+  <p class="page-eyebrow">tak48dev</p>
+  <h1>Terms<br>of Use</h1>
+  <p class="updated">
+    <span data-lang="ja">最終更新日：2026年4月1日</span>
+    <span data-lang="en">Last updated: April 1, 2026</span>
+  </p>
+  <div class="doc-body">
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>1. 同意</h2>
+        <p>本アプリをダウンロード、インストール、または使用した時点で、本規約に同意したものとみなします。同意いただけない場合は、本アプリのご利用をお控えください。</p>
+      </div>
+      <div data-lang="en">
+        <h2>1. Acceptance</h2>
+        <p>By downloading, installing, or using the App, you agree to these Terms. If you do not agree, please do not use the App.</p>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>2. 利用条件</h2>
+        <ul>
+          <li>本アプリはハンドボールの試合記録・スコア管理を目的としたツールです。</li>
+          <li>合法的かつ本規約に従った目的のみに使用するものとします。</li>
+          <li>13歳未満の方は保護者の同意のもとでご利用ください。</li>
+        </ul>
+      </div>
+      <div data-lang="en">
+        <h2>2. Permitted Use</h2>
+        <ul>
+          <li>The App is a tool for recording handball match scores and statistics.</li>
+          <li>You agree to use the App only for lawful purposes.</li>
+          <li>Users under 13 must have parental consent.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>3. アプリ内課金</h2>
+        <ul>
+          <li>「広告削除」機能をワンタイム購入（買い切り）で提供しています。</li>
+          <li>購入は Apple の App Store を通じて処理されます。返金は Apple サポートへご連絡ください。</li>
+          <li>同一の Apple ID で機種変更後も「購入の復元」機能で追加費用なく引き継げます。</li>
+          <li>サブスクリプションではないため、定期的な課金は発生しません。</li>
+        </ul>
+      </div>
+      <div data-lang="en">
+        <h2>3. In-App Purchase</h2>
+        <ul>
+          <li>An "Ad Removal" feature is available as a one-time purchase.</li>
+          <li>Purchases are processed via Apple's App Store. For refunds, contact Apple Support.</li>
+          <li>The purchase can be restored on a new device at no charge using the same Apple ID.</li>
+          <li>This is not a subscription — no recurring charges apply.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>4. 広告</h2>
+        <ul>
+          <li>無料版では Google AdMob による広告が表示されます。</li>
+          <li>広告削除購入後は一切の広告が表示されなくなります。</li>
+        </ul>
+      </div>
+      <div data-lang="en">
+        <h2>4. Advertising</h2>
+        <ul>
+          <li>The free version displays ads provided by Google AdMob.</li>
+          <li>After purchasing ad removal, no ads will be shown.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>5. 免責事項</h2>
+        <p>本アプリは「現状のまま」提供されます。本アプリの使用または使用不能により生じた損害（試合データの消失等を含む）について、開発者は一切責任を負いません。</p>
+      </div>
+      <div data-lang="en">
+        <h2>5. Disclaimer</h2>
+        <p>The App is provided "as is." The Developer is not liable for any damages arising from your use or inability to use the App, including loss of match data.</p>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>6. 知的財産権</h2>
+        <p>本アプリのソースコード、デザイン、名称等に関する知的財産権は開発者に帰属します。リバースエンジニアリング、複製、再配布は禁止します。</p>
+      </div>
+      <div data-lang="en">
+        <h2>6. Intellectual Property</h2>
+        <p>All intellectual property rights relating to the App belong to the Developer. Reverse engineering, copying, or redistribution is prohibited.</p>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>7. 規約の変更</h2>
+        <p>必要に応じて本規約を変更することがあります。変更後の規約はこのページに掲載され、掲載日をもって効力を生じます。</p>
+      </div>
+      <div data-lang="en">
+        <h2>7. Changes</h2>
+        <p>These Terms may be updated as necessary. Changes take effect from the date posted on this page.</p>
+      </div>
+    </div>
+
+    <div class="doc-section">
+      <div data-lang="ja">
+        <h2>8. 準拠法・お問い合わせ</h2>
+        <p>本規約は日本法に準拠します。ご質問は <a href="mailto:tak48dev@gmail.com">tak48dev@gmail.com</a> までご連絡ください。</p>
+      </div>
+      <div data-lang="en">
+        <h2>8. Governing Law &amp; Contact</h2>
+        <p>These Terms are governed by the laws of Japan. For questions: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</main>
+<footer>
+  <span>© 2026 tak48dev</span>
+  <span>Made in Japan 🇯🇵</span>
+</footer>
+<script>
+  function setLang(lang, silent) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    if (!silent) localStorage.setItem('tak48dev-lang', lang);
+  }
+  (function() {
+    var saved = localStorage.getItem('tak48dev-lang');
+    var auto  = (navigator.language || 'ja').startsWith('ja') ? 'ja' : 'en';
+    setLang(saved || auto, true);
+  })();
+</script>
+</body>
+</html>
